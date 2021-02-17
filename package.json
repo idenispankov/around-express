@@ -1,0 +1,19 @@
+{
+  "name": "around-express-node",
+  "version": "1.0.0",
+  "description": "express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idenispankov/around-express.git"
+  },
+  "author": "Denis Pankov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idenispankov/around-express/issues"
+  },
+  "homepage": "https://github.com/idenispankov/around-express#readme"
+}
