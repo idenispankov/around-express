@@ -20,6 +20,13 @@
     ],
     "rules": {
         "no-underscore-dangle": 0,
-        "no-console": 0
+        "no-console": 0,
+        "prefer-template": 0,
+        "no-multiple-empty-lines": 0,
+        "import/newline-after-import": 0,
+        "arrow-body-style": 0,
+        "no-shadow": 0,
+        "no-unused-vars": 0,
+        "padded-blocks": 0
     }
 }
