@@ -1,13 +1,6 @@
-const fs = require('fs').promises;
 const path = require('path');
 const usersData = path.join(__dirname, '..', '..', 'data', 'users.json');
-
-// Get File Content and Read It
-const getFileContent = (path) => {
-  return fs.readFile(path, { endoding: 'utf-8' })
-    .then(JSON.parse)
-    .catch((err) => console.log(err));
-};
+const { getFileContent } = require('./helpers/getFileContent');
 
 const getUsers = (req, res) => {
   getFileContent(usersData)
