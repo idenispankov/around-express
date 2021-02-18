@@ -1,7 +1,6 @@
 {
     "env": {
         "browser": true,
-        "commonjs": true,
         "es2021": true
     },
     "extends": [
@@ -27,6 +26,7 @@
         "arrow-body-style": 0,
         "no-shadow": 0,
         "no-unused-vars": 0,
-        "padded-blocks": 0
+        "padded-blocks": 0,
+        "comma-dangle": 0
     }
 }
