@@ -1,5 +1,5 @@
 const path = require('path');
-const usersData = path.join(__dirname, '..', '..', 'data', 'users.json');
+const usersData = path.join(__dirname, '..', 'data', 'users.json');
 const { getFileContent } = require('./helpers/getFileContent');
 
 const getUsers = (req, res) => {

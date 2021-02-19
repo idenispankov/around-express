@@ -1,11 +1,12 @@
 const fs = require('fs').promises;
-const path = require('path');
 
 // Get File Content and Read It
 const getFileContent = (path) => {
   return fs.readFile(path, { encoding: 'utf-8' })
     .then(JSON.parse)
-    .catch((err) => console.log(err));
+    .catch((res, req) => {
+      return res.status(500).send({ message: 'Internal Server Error' });
+    });
 };
 
 module.exports = { getFileContent };
