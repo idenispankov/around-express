@@ -1,7 +1,5 @@
 const path = require("path");
 const Card = require("../models/card");
-// const cardsData = path.join(__dirname, "..", "data", "cards.json");
-// const { getFileContent } = require("../helpers/getFileContent");
 
 const getCards = (req, res) => {
   return Card.find({})
@@ -26,20 +24,20 @@ const createCard = (req, res) => {
     .catch((err) => res.status(500).send({ message: "Unable to create Card" }));
 };
 
-// const deleteCard = (req, res) => {
-//   return Card.findById({ _id: req.params.cardId })
-//     .then((card) => {
-//       if (!card) {
-//         res.status(404).send({ message: "card not found" });
-//       } else if (!card.owner._id === req.user.cardId) {
-//         res.status(403).send({ message: "Not Authorized to delete this card" });
-//       } else {
-//         Card.findByIdAndDelete({ _id: req.params.cardId }).then(() =>
-//           res.status(200).send({ message: "Deleted Succesfully" })
-//         );
-//       }
-//     })
-//     .catch((err) => res.status(500).send({ message: "Server Error" }));
-// };
+const deleteCard = (req, res) => {
+  return Card.findByIdAndRemove({ _id: req.params.id })
+    .then((card) => {
+      if (!card) {
+        res.status(404).send({ message: "card not found" });
+      } else if (!card.owner._id === req.user.id) {
+        res.status(403).send({ message: "Not Authorized to delete this card" });
+      } else {
+        Card.findByIdAndDelete({ _id: req.params.id }).then(() =>
+          res.status(200).send({ message: "Deleted Succesfully" })
+        );
+      }
+    })
+    .catch((err) => res.status(500).send({ message: "Server Error" }));
+};
 
-module.exports = { getCards, createCard, getSingleCard };
+module.exports = { getCards, createCard, getSingleCard, deleteCard };

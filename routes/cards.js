@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getCards,
   createCard,
-  // deleteCard,
+  deleteCard,
   getSingleCard,
 } = require("../controllers/cardsController");
 
@@ -13,6 +13,6 @@ router.get("/cards/:id", getSingleCard);
 
 router.post("/cards", createCard);
 
-// router.delete("/cards/:id", deleteCard);
+router.delete("/cards/:id", deleteCard);
 
 module.exports = router;
