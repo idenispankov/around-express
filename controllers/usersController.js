@@ -30,3 +30,23 @@ module.exports = {
   getSingleUser,
   createUser,
 };
+
+// const getSingleUser = (req, res) => {
+//   getFileContent(usersData)
+//     .then((users) => {
+//       const user = users.find((user) => user._id === req.params.id);
+//       if (user) {
+//         return res.status(200).send(user);
+//       }
+//       return res.status(404).send({ message: 'User ID not found' });
+//     });
+// };
+
+// const getSingleUser = (req, res) => {
+//   return User.findById({ _id: req.params.id }).then((user) => {
+//     if (user) {
+//       return res.status(200).send(user);
+//     }
+//     return res.status(404).send({ message: "User ID not found" });
+//   });
+// };

@@ -5,7 +5,6 @@ const {
   getSingleUser,
   createUser,
 } = require("../controllers/usersController");
-const User = require("../models/user");
 
 // Get All Users
 router.get("/users", getUsers);
