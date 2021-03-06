@@ -1,4 +1,3 @@
-const path = require("path");
 const Card = require("../models/card");
 
 const getCards = (req, res) => {
@@ -36,7 +35,7 @@ const deleteCard = (req, res) => {
       }
       res.status(200).send({ message: "Succesfully Deleted" });
     })
-    .catch((err) => res.status(500).send({ message: "Error!!!" }));
+    .catch((err) => res.status(500).send({ message: "Unable to delete card" }));
 };
 
 const likeCard = (req, res) => {
@@ -51,7 +50,7 @@ const likeCard = (req, res) => {
       }
       res.status(200).send(card);
     })
-    .catch((err) => res.status(500).send({ message: "Errorrr!!!" }));
+    .catch((err) => res.status(500).send({ message: "Unable to like card" }));
 };
 
 const dislikeCard = (req, res) => {
@@ -66,7 +65,9 @@ const dislikeCard = (req, res) => {
       }
       res.status(200).send(card);
     })
-    .catch((err) => res.status(500).send({ message: "Errorrr!!!" }));
+    .catch((err) =>
+      res.status(500).send({ message: "Unable to dislike card" })
+    );
 };
 
 module.exports = {

@@ -9,14 +9,16 @@ const getUsers = (req, res) => {
 const getSingleUser = (req, res) => {
   return User.findById({ _id: req.params.id })
     .then((user) => res.send(user))
-    .catch((err) => res.status(500).send({ message: "User ID not found" }));
+    .catch((err) => res.status(404).send({ message: "User ID not found" }))
+    .catch((err) => res.status(500).send({ message: "Server Error" }));
 };
 
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   return User.create({ name, about, avatar })
     .then((user) => res.status(200).send(user))
-    .catch((err) => res.status(500).send({ message: "Unable to create User" }));
+    .catch((err) => res.status(400).send({ message: "Unable to create User" }))
+    .catch((err) => res.status(500).send({ message: "Server Error" }));
 };
 
 const updateUser = (req, res) => {
@@ -32,7 +34,7 @@ const updateUser = (req, res) => {
       }
       res.status(200).send(user);
     })
-    .catch((err) => res.status(500).send({ message: "Bad Request" }));
+    .catch((err) => res.status(500).send({ message: "Unable to update User" }));
 };
 
 function updateAvatar(req, res, next) {
@@ -48,7 +50,9 @@ function updateAvatar(req, res, next) {
       }
       res.status(200).send(user);
     })
-    .catch((err) => res.status(500).send({ message: "Bar Request" }));
+    .catch((err) =>
+      res.status(500).send({ message: "Unable to update avatar" })
+    );
 }
 
 module.exports = {
