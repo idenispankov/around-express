@@ -12,9 +12,9 @@ const getSingleCard = (req, res) => {
       if (cards.length > 0) {
         return res.status(200).send(cards[0]);
       }
-      return res.status(404).send({ message: "Not Found" });
+      return res.status(404).send({ message: "Unable To find a Card" });
     })
-    .catch((err) => res.status(404).send({ message: "Unable To find a Card" }));
+    .catch((err) => res.status(500).send({ message: "error" }));
 };
 //  if(card === [])
 

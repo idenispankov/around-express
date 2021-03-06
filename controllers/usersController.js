@@ -1,25 +1,24 @@
 const User = require("../models/user");
-const NOT_FOUND = 404;
-const BAD_REQUEST = 400;
-const SERVER_ERROR = 500;
-const OK = 200;
 
 const getUsers = (req, res) => {
   return User.find({})
-    .then((users) => res.status(OK).send(users))
-    .catch((err) =>
-      res.status(SERVER_ERROR).send({ message: "Unable to find users" })
-    );
+    .then((users) => res.status(200).send(users))
+    .catch((err) => res.status(400).send({ message: "Unable to find users" }));
 };
 
 const getSingleUser = (req, res) => {
   return User.findById({ _id: req.params.id })
-    .then((user) => res.send(user))
+    .then((user) => {
+      if (!user) {
+        return res.status(400).send({ message: "User is not exist" });
+      }
+      return res.status(200).send(user);
+    })
     .catch((err) => {
       if (err.name === "CastError") {
-        return res.status(NOT_FOUND).send({ message: "User ID not found" });
+        return res.status(404).send({ message: "User is not exist" });
       }
-      return res.status(SERVER_ERROR).send({ message: "Server Error" });
+      return res.status(500).send({ message: "Internal Server Error" });
     });
 };
 
