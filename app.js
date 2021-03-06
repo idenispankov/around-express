@@ -18,8 +18,6 @@ mongoose.connect("mongodb://localhost:27017/aroundb", {
   useFindAndModify: false,
 });
 
-// app.use(express.static(path.join(__dirname, "public")));
-
 app.use((req, res, next) => {
   req.user = {
     _id: "6041b611880cf075fb20df8d",

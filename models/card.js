@@ -13,7 +13,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v, { protocols: ["http", "https"] }),
-      message: "You must provide a valid URL for the user avatar.",
+      message: "Please provide a valid URL for the user avatar.",
     },
   },
   owner: {
