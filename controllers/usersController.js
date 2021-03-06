@@ -24,12 +24,24 @@ const getSingleUser = (req, res) => {
 
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
-  return User.create({ name, about, avatar }).then((user) =>
-    res.status(200).send(user)
-  );
-  // .catch((err) => res.status(400).send({ message: "Unable to create User" }))
-  // .catch((err) => res.status(500).send({ message: "Server Error" }));
+  return User.create({ name, about, avatar })
+    .then((user) => res.status(200).send(user))
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        return res.status(400).send({ message: err.message });
+      }
+      return res.status(500).send({ message: "Internal Server Error" });
+    });
 };
+
+// const createUser = (req, res) => {
+//   const { name, about, avatar } = req.body;
+//   return User.create({ name, about, avatar }).then((user) =>
+//     res.status(200).send(user)
+//   );
+//   // .catch((err) => res.status(400).send({ message: "Unable to create User" }))
+//   // .catch((err) => res.status(500).send({ message: "Server Error" }));
+// };
 
 const updateUser = (req, res) => {
   const { name, about } = req.body;
