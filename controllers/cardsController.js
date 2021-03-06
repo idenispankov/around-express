@@ -8,11 +8,15 @@ const getCards = (req, res) => {
 
 const getSingleCard = (req, res) => {
   return Card.find({ _id: req.params.id })
-    .then((card) => {
-      res.status(200).send(card);
+    .then((cards) => {
+      if (cards.length > 0) {
+        return res.status(200).send(cards[0]);
+      }
+      return res.status(404).send({ message: "Not Found" });
     })
     .catch((err) => res.status(404).send({ message: "Unable To find a Card" }));
 };
+//  if(card === [])
 
 const createCard = (req, res) => {
   const { name, link } = req.body;
