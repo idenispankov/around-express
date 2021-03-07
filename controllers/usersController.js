@@ -50,7 +50,7 @@ const updateUser = (req, res) => {
     .catch((err) => res.status(500).send({ message: err.message }));
 };
 
-function updateAvatar(req, res, next) {
+function updateAvatar(req, res) {
   const { avatar } = req.body;
   return User.findByIdAndUpdate(
     req.params.id,
