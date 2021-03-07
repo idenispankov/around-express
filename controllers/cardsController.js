@@ -3,20 +3,24 @@ const Card = require("../models/card");
 const getCards = (req, res) => {
   return Card.find({})
     .then((cards) => res.status(200).send(cards))
-    .catch((err) => res.status(404).send({ message: "Unable to find cards" }));
+    .catch((err) => res.status(404).send({ message: err.message }));
 };
 
 const getSingleCard = (req, res) => {
-  return Card.find({ _id: req.params.id })
-    .then((cards) => {
-      if (cards.length > 0) {
-        return res.status(200).send(cards[0]);
+  return Card.findById({ _id: req.params.id })
+    .then((card) => {
+      if (!card) {
+        return res.status(404).send({ message: "Card Not Found" });
       }
-      return res.status(404).send({ message: "Unable To find a Card" });
+      return res.status(200).send(card);
     })
-    .catch((err) => res.status(500).send({ message: "error" }));
+    .catch((err) => {
+      if (err.name === "CastError") {
+        return res.status(404).send({ message: "Card Not Found" });
+      }
+      return res.status(500).send({ message: err.message });
+    });
 };
-//  if(card === [])
 
 const createCard = (req, res) => {
   const { name, link } = req.body;
@@ -26,20 +30,30 @@ const createCard = (req, res) => {
     owner: req.user._id,
   })
     .then((card) => res.send(card))
-    .catch((err) => res.status(500).send({ message: "Unable to create Card" }));
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        return res.status(400).send({ message: err.message });
+      }
+      return res.status(500).send({ message: err.message });
+    });
 };
 
 const deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
       if (!card) {
-        res.status(404).send({ message: "Unable to find a card" });
+        res.status(404).send({ message: "Card Not Found" });
       } else if (!card.owner._id === req.user._id) {
         res.status(403).send({ message: "Forbidden!!!" });
       }
       res.status(200).send({ message: "Succesfully Deleted" });
     })
-    .catch((err) => res.status(500).send({ message: "Unable to delete card" }));
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        res.status(400).send({ message: err.message });
+      }
+      return res.status(500).send({ message: err.message });
+    });
 };
 
 const likeCard = (req, res) => {
@@ -50,11 +64,16 @@ const likeCard = (req, res) => {
   )
     .then((card) => {
       if (!card) {
-        res.status(404).send({ message: "Unable to find a card" });
+        res.status(404).send({ message: "Card Not Found" });
       }
       res.status(200).send(card);
     })
-    .catch((err) => res.status(500).send({ message: "Unable to like card" }));
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        res.status(400).send({ message: err.message });
+      }
+      return res.status(500).send({ message: err.message });
+    });
 };
 
 const dislikeCard = (req, res) => {
@@ -65,13 +84,16 @@ const dislikeCard = (req, res) => {
   )
     .then((card) => {
       if (!card) {
-        res.status(404).send({ message: "Unable to find a Card" });
+        res.status(404).send({ message: "Card Not Found" });
       }
       res.status(200).send(card);
     })
-    .catch((err) =>
-      res.status(500).send({ message: "Unable to dislike card" })
-    );
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        res.status(400).send({ message: err.message });
+      }
+      return res.status(500).send({ message: err.message });
+    });
 };
 
 module.exports = {
