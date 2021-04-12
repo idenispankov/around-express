@@ -1,0 +1,41 @@
+{
+  "name": "around-express",
+  "version": "1.0.0",
+  "description": "express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idenispankov/around-express.git"
+  },
+  "author": "Denis Pankov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idenispankov/around-express/issues"
+  },
+  "homepage": "https://github.com/idenispankov/around-express#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^14.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "express-winston": "^4.1.0",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.18",
+    "validator": "^13.5.2",
+    "winston": "^3.3.3"
+  }
+}
